@@ -1,0 +1,11 @@
+/* SŌMA — Global CSS reset & base */
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #F5EFE8;
+  color: #18152E;
+  font-family: 'Outfit', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}

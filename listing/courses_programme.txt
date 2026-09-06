@@ -1,0 +1,63 @@
+COURSES 2 ROUES PROGRAMME — BASE DE RÉFÉRENCE
+==============================================
+(57 lignes — dont 48 PROGRAMME + 9 PROGRAMME A/R)
+
+#   ENLÈVEMENT                                               | LIVRAISON                                                    | BONS  | TYPE
+--- --------------------------------------------------------- | ------------------------------------------------------------ | ----- | -----------------------
+1   BEAUJON EFS LABORATOIRE - 92110 CLICHY                   | AVICENNE EFS LABORATOIRE - 93000 BOBIGNY                     |  6    | 2 ROUES PROGRAMME
+2   BEAUJON EFS LABORATOIRE - 92110 CLICHY                   | AVICENNE LABORATOIRE - 93000 BOBIGNY                         |  6    | 2 ROUES PROGRAMME
+3   BEAUJON EFS LABORATOIRE - 92110 CLICHY                   | BICHAT EFS POUR AVICENNE LABORATOIRE - 93000                 |  6    | 2 ROUES PROGRAMME
+4   BECLERE ANTOINE + NECKER 21H30 - 92140 CLAMART           | HEGP - 75015 PARIS                                           |  7    | 2 ROUES PROGRAMME
+5   BICHAT EFS - 75018 PARIS                                  | AVICENNE EFS - 93000 BOBIGNY                                 |  5    | 2 ROUES PROGRAMME
+6   BICHAT EFS - 75018 PARIS                                  | EFS BEAUJON+AVICENNE EFS LABORATOIRE - 93000                 |  6    | 2 ROUES PROGRAMME
+7   BICHAT EFS LABORATOIRE - 75018 PARIS                      | AVICENNE EFS LABORATOIRE - 93000 BOBIGNY                     |  5    | 2 ROUES PROGRAMME
+8   BROUSSE - LRR - 94800 VILLEJUIF                           | BICETRE- CENTRE DE TRI - 94270 KREMLIN BICETRE/LE            |  4    | 2 ROUES PROGRAMME
+9   CENTRE HOSPITALIER DES 4 VILLES - 92210 ST CLOUD         | AMBROISE PARE - 92100 BOULOGNE BILLANCOURT                   |  3    | 2 ROUES PROGRAMME
+10  CNRGS - 75011 PARIS                                       | INSERM NECKER - 75015 PARIS                                  |  2.5  | 2 ROUES PROGRAMME
+11  CNRGS - 75011 PARIS                                       | MONDOR HLA - 94000 CRETEIL                                   |  5    | 2 ROUES PROGRAMME
+12  COCHIN - 75014 PARIS                                      | PITIE - 75013 PARIS                                          |  2.5  | 2 ROUES PROGRAMME
+13  COCHIN - 75014 PARIS                                      | ST ANNE - 75014 PARIS                                        |  5    | 2 ROUES PROGRAMME A/R
+14  COCHIN - 75014 PARIS                                      | ST ANNE - 75014 PARIS 14 + retour                            |  5    | 2 ROUES PROGRAMME A/R
+15  COCHIN CIC 1417 - 75014 PARIS                             | INSERM U955 - EQUIPE LEVY - 94015 CRETEIL                    |  5    | 2 ROUES PROGRAMME
+16  COCHIN CIC 1417 - 75014 PARIS                             | INSERM U955-EQUIPE LEVY - 94000 CRETEIL                      |  5    | 2 ROUES PROGRAMME
+17  COORDINNATION ST ANTOINE - 75012 PARIS                    | U.I.T.C / BANQUE DE TISSUS - 94015 CRETEIL                   |  5    | 2 ROUES PROGRAMME
+18  CROZATIER - 75012 PARIS                                   | MONDOR HLA - 94000 CRETEIL                                   |  5    | 2 ROUES PROGRAMME
+19  CROZATIER - 75012 PARIS                                   | U.I.T.C - 94015 CRETEIL                                      |  5    | 2 ROUES PROGRAMME
+20  CROZATIER - 75012 PARIS                                   | U.I.T.C / BANQUE DE TISSUS / 01 56 72 10 90 - 94015          |  5    | 2 ROUES PROGRAMME
+21  CROZATIER - 75012 PARIS                                   | U.I.T.C RECHERCHE - 94015 CRETEIL                            |  5    | 2 ROUES PROGRAMME
+22  EFS PITIE - 75013 PARIS                                   | BICETRE EFS - 94270 KREMLIN BICETRE/LE                       |  5    | 2 ROUES PROGRAMME A/R
+23  EFS PITIE - 75013 PARIS                                   | BICETRE EFS - 94270 KREMLIN BICETRE/LE +                     |  5    | 2 ROUES PROGRAMME A/R
+24  EFS PITIE - 75013 PARIS                                   | BICETRE EFS - 94270 KREMLIN BICETRE/LE + retour              |  5    | 2 ROUES PROGRAMME A/R
+25  EFS PITIE - 75013 PARIS                                   | COCHIN EFS - 75014 PARIS                                     |  5    | 2 ROUES PROGRAMME A/R
+26  EFS PITIE - 75013 PARIS                                   | COCHIN EFS - 75014 PARIS 14 + retour                         |  5    | 2 ROUES PROGRAMME A/R
+27  EFS PITIE - 75013 PARIS                                   | IGR EFS - 94800 VILLEJUIF                                    |  7.5  | 2 ROUES PROGRAMME A/R
+28  EFS PITIE - 75013 PARIS                                   | IGR EFS - 94800 VILLEJUIF + retour                           |  7.5  | 2 ROUES PROGRAMME A/R
+29  EFS PONTOISE - 95300 PONTOISE                             | RUNGIS DISTRIBUTION - 94514 RUNGIS                           | 15    | 2 ROUES PROGRAMME
+30  EFS ST ANTOINE - 75012 PARIS                              | EFS ST ANTOINE - 75012 PARIS                                 |  9    | 2 ROUES PROGRAMME
+31  EFS ST ANTOINE - 75012 PARIS                              | EFS ST ANTOINE - 75012 PARIS 12 + retour                     |  9    | 2 ROUES PROGRAMME
+32  EVRY - EFS - 91000 EVRY                                   | CLINIQUE DU MOUSSEAU - 91000 EVRY                            | 10    | 2 ROUES PROGRAMME
+33  IGR - 94800 VILLEJUIF                                     | COCHIN+PITIE - 75013 PARIS                                   |  5    | 2 ROUES PROGRAMME
+34  KORIAN VAL DE SEINE - 78430 LOUVECIENNES                  | HOPITAL PRIVE DE L EUROPE - 78560 LE PORT MARLY              | 10    | 2 ROUES PROGRAMME
+35  LARIBOISIERE EFS LABO - 75010 PARIS                       | DEBRE LABO - ST ANTOINE EFS LABO - 75012 PARIS               |  4    | 2 ROUES PROGRAMME
+36  MONDOR BNSPR - 94015 CRETEIL                              | NECKER - EFS - 75015 PARIS                                   |  5    | 2 ROUES PROGRAMME
+37  MONDOR BNSPR - 94015 CRETEIL                              | VERSAILLES - 78150 CHESNAY LE                                | 11    | 2 ROUES PROGRAMME
+38  NECKER EFS - 75015 PARIS                                  | HEGP - 75015 PARIS                                           |  2.5  | 2 ROUES PROGRAMME
+39  NECKER ENFANT MALADE - 75015 PARIS                        | LABORATOIRE UMR 1184 INSERM - 94270 KREMLIN                  |  3    | 2 ROUES PROGRAMME
+40  NECKER ENFANT MALADE - 75015 PARIS                        | PITIE IMUNOLOGIE - 75013 PARIS                               |  3    | 2 ROUES PROGRAMME
+41  NEPHROCARE MONTFERMEIL - 93370 MONTFERMEIL                | HOPITAL DE MONTFERMEIL - 93370 MONTFERMEIL                   |  7    | 2 ROUES PROGRAMME
+42  PONTOISE PREPA - 95300 PONTOISE                           | RUNGIS EFS PREPA - 94514 RUNGIS                              | 15    | 2 ROUES PROGRAMME
+43  PONTOISE PREPA - 95300 PONTOISE                           | RUNGIS PREPA - 94514 RUNGIS                                  | 15    | 2 ROUES PROGRAMME
+44  PONTOISE PREPA - 95300 PONTOISE                           | RUNGIS/ LABO CQPF 01 45 12 77 71 - 94514 RUNGIS             | 15    | 2 ROUES PROGRAMME
+45  PONTOISE PREPA - 95300 PONTOISE                           | ST ANTOINE - EFS - 75012 PARIS                               | 11    | 2 ROUES PROGRAMME
+46  RUNGIS - 94150 RUNGIS                                     | IGR EFS - 94800 VILLEJUIF                                    |  5    | 2 ROUES PROGRAMME
+47  RUNGIS EFS - 94514 RUNGIS                                 | AVICENNE EFS - 93000 BOBIGNY                                 |  6    | 2 ROUES PROGRAMME
+48  RUNGIS EFS - 94514 RUNGIS                                 | CAMPUS EFS - 93200 ST DENIS                                  |  6    | 2 ROUES PROGRAMME
+49  RUNGIS/PREPA - 94514 RUNGIS                               | AVICENNE EFS - 93000 BOBIGNY                                 |  6    | 2 ROUES PROGRAMME
+50  RUNGIS/PREPA - 94514 RUNGIS                               | CAMPUS EFS - 93200 ST DENIS                                  |  5    | 2 ROUES PROGRAMME
+51  ST-LOUIS COLLECTE - 75010 PARIS                           | RUNGIS PREPA - 94514 RUNGIS                                  |  5    | 2 ROUES PROGRAMME
+52  TENON - 75020 PARIS                                       | ST-LOUIS - SAINT ANTOINE - 75012 PARIS                       |  4    | 2 ROUES PROGRAMME
+53  TRINITE - 75009 PARIS                                     | RUNGIS - 94150 RUNGIS                                        |  5    | 2 ROUES PROGRAMME
+54  TRINITE - 75009 PARIS                                     | VERSAILLES CENTRE DE SOINS - 78000                           | 11    | 2 ROUES PROGRAMME
+55  TROUSSEAU - 75012 PARIS                                   | TENON - ST ANTOINE - 75012 PARIS                             |  4    | 2 ROUES PROGRAMME
+56  TROUSSEAU EFS - 75012 PARIS                               | PASSAGE TENON - EFS ST ANTOINE - 75012 PARIS                 |  3.5  | 2 ROUES PROGRAMME
+57  U.I.T.C / BANQUE DE TISSUS - 94015 CRETEIL               | TENON MORTUAIRE - 75020 PARIS                                |  5    | 2 ROUES PROGRAMME

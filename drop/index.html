@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="SŌMA — Appareils de massage électronique premium. Pistolet de massage, masseur cervical, lifting EMS. Récupérez mieux, vivez pleinement. Livraison offerte dès 60€." />
+    <meta name="robots" content="index, follow" />
+    <meta name="keywords" content="pistolet de massage, masseur électronique, massage gun, masseur cervical, lifting EMS, appareil de massage, récupération musculaire" />
+    <meta name="theme-color" content="#060810" />
+    <link rel="canonical" href="https://soma-wellness.fr/" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="SŌMA" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:title" content="Appareils de Massage Électronique Premium | SŌMA" />
+    <meta property="og:description" content="Pistolet de massage, masseur cervical infrarouge, EMS lifting. Technologie bien-être premium. Livraison offerte dès 60€." />
+    <meta property="og:url" content="https://soma-wellness.fr/" />
+    <meta property="og:image" content="https://soma-wellness.fr/og-image.jpg" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Appareils de Massage Électronique Premium | SŌMA" />
+    <meta name="twitter:description" content="Pistolet de massage, masseur cervical infrarouge, EMS lifting. Technologie bien-être premium. Livraison offerte dès 60€." />
+    <meta name="twitter:image" content="https://soma-wellness.fr/og-image.jpg" />
+
+    <title>Appareils de Massage Électronique Premium | SŌMA</title>
+
+    <!-- Données structurées -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "SŌMA",
+      "url": "https://soma-wellness.fr",
+      "logo": "https://soma-wellness.fr/favicon.svg",
+      "description": "Appareils de massage électronique premium. Récupération musculaire, bien-être et relaxation."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "SŌMA",
+      "url": "https://soma-wellness.fr",
+      "inLanguage": "fr-FR"
+    }
+    </script>
+
+    <!-- Google Fonts: Cormorant Garant + Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+      :root {
+        --dark:       #060810;
+        --surface:    #0F0E1C;
+        --surface2:   #151323;
+        --gold:       #C4966A;
+        --gold-light: #DDB880;
+        --gold-glow:  rgba(196,150,106,0.12);
+        --cream:      #EDE8DF;
+        --stone:      #7A758E;
+        --espresso:   #0F0E1C;
+        --border:     rgba(255,255,255,0.07);
+        --border-gold: rgba(196,150,106,0.2);
+      }
+
+      html { scroll-behavior: smooth; }
+
+      body {
+        background: #060810;
+        color: #EDE8DF;
+        font-family: 'Outfit', sans-serif;
+        font-weight: 400;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      img { display: block; max-width: 100%; }
+      button { border: none; background: none; font-family: inherit; cursor: pointer; }
+
+      @keyframes heroZoom {
+        from { transform: scale(1); }
+        to   { transform: scale(1.06); }
+      }
+      @keyframes marquee {
+        from { transform: translateX(0); }
+        to   { transform: translateX(-50%); }
+      }
+      @keyframes slideInRight {
+        from { transform: translateX(100%); opacity: 0; }
+        to   { transform: translateX(0);    opacity: 1; }
+      }
+      @keyframes fadeUp {
+        from { transform: translateY(24px); opacity: 0; }
+        to   { transform: translateY(0);    opacity: 1; }
+      }
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to   { opacity: 1; }
+      }
+      @keyframes pulse {
+        0%, 100% { opacity: 0.3; transform: scaleY(0.6); }
+        50%      { opacity: 1;   transform: scaleY(1);   }
+      }
+      @keyframes glowPulse {
+        0%, 100% { opacity: 0.6; }
+        50%      { opacity: 1; }
+      }
+
+      .scrollbar-hide::-webkit-scrollbar { display: none; }
+      .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

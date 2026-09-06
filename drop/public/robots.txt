@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Disallow: /admin
+Disallow: /commande
+Disallow: /commande/succes
+
+Sitemap: https://kohi.fr/sitemap.xml
