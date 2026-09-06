@@ -1,0 +1,61 @@
+# ====================================================
+# robots.txt — ENERVIA RENOV
+# Mis à jour le 13 août 2026
+# ====================================================
+
+# --- Moteurs de recherche classiques ---
+User-agent: Googlebot
+Allow: /
+Disallow: /*.md$
+
+User-agent: Bingbot
+Allow: /
+Disallow: /*.md$
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+# --- Agents IA (autorisés pour le GEO / RAG) ---
+# OpenAI / ChatGPT
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Anthropic / Claude
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+# Google AI (Gemini / SGE)
+User-agent: Google-Extended
+Allow: /
+
+# Meta AI
+User-agent: Meta-ExternalAgent
+Allow: /
+
+# Common Crawl (alimentation datasets IA)
+User-agent: CCBot
+Allow: /
+
+# Cohere
+User-agent: cohere-ai
+Allow: /
+
+# --- Tous les autres robots ---
+User-agent: *
+Allow: /
+
+# --- Sitemap ---
+Sitemap: https://www.enervia.fr/sitemap.xml

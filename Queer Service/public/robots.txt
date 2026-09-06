@@ -1,0 +1,16 @@
+# Queer Service — robots.txt
+
+User-agent: *
+Allow: /
+
+# Routes privées / authentifiées
+Disallow: /admin
+Disallow: /messages
+Disallow: /profil
+Disallow: /connexion
+Disallow: /inscription
+Disallow: /onboarding
+Disallow: /parametres
+Disallow: /installer
+
+Sitemap: https://www.queerservice.fr/sitemap.xml

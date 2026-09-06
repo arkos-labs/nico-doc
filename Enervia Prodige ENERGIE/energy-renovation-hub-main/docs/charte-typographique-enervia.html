@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Charte Typographique — ENERVIA RENOV</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --display: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+    --green-dark: #17221c;
+    --green-mid: #3f6147;
+    --green-muted: #566159;
+    --green-light: #8a9490;
+    --terra: #b9783e;
+    --terra-dark: #9a6034;
+    --cream: #f5f1e8;
+    --cream-mid: #ebe7de;
+    --border: #d7cfc3;
+    --white: #ffffff;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--cream);
+    color: var(--green-dark);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── Layout ─── */
+  .page { max-width: 1080px; margin: 0 auto; padding: 3rem 2rem 6rem; }
+
+  /* ─── En-tête ─── */
+  .header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 3.5rem;
+  }
+  .header-eyebrow {
+    font-family: var(--sans);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--terra);
+    margin-bottom: 0.6rem;
+  }
+  .header-title {
+    font-family: var(--display);
+    font-size: 2.75rem;
+    font-weight: 600;
+    letter-spacing: -0.035em;
+    line-height: 1.06;
+    color: var(--green-dark);
+  }
+  .header-badge {
+    background: var(--green-dark);
+    color: white;
+    font-family: var(--sans);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.5rem 1rem;
+    white-space: nowrap;
+    align-self: center;
+  }
+
+  /* ─── Sections ─── */
+  .section { margin-bottom: 4rem; }
+  .section-label {
+    font-family: var(--sans);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--terra);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* ─── Duo de polices ─── */
+  .font-duo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    margin-bottom: 3rem;
+  }
+  .font-card {
+    background: var(--white);
+    padding: 2rem;
+  }
+  .font-card-role {
+    font-family: var(--sans);
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--green-light);
+    margin-bottom: 1.25rem;
+  }
+  .font-card-name {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--green-dark);
+    margin-bottom: 0.25rem;
+  }
+  .font-card-fallback {
+    font-size: 0.7rem;
+    color: var(--green-light);
+    margin-bottom: 1.5rem;
+    font-family: var(--sans);
+  }
+  .font-display-sample {
+    font-family: var(--display);
+    font-size: 3.25rem;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    color: var(--green-dark);
+    margin-bottom: 0.75rem;
+  }
+  .font-sans-sample {
+    font-family: var(--sans);
+    font-size: 1.75rem;
+    font-weight: 400;
+    line-height: 1.3;
+    color: var(--green-dark);
+    margin-bottom: 0.75rem;
+  }
+  .font-weights {
+    display: flex;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--cream-mid);
+  }
+  .weight-item { text-align: center; }
+  .weight-sample-display {
+    font-family: var(--display);
+    font-size: 1.5rem;
+    line-height: 1;
+    color: var(--green-dark);
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+  .weight-sample-sans {
+    font-family: var(--sans);
+    font-size: 1rem;
+    line-height: 1;
+    color: var(--green-dark);
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+  .weight-label {
+    font-family: var(--sans);
+    font-size: 0.6rem;
+    color: var(--green-light);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+  }
+
+  /* ─── Échelle typographique ─── */
+  .scale-table { width: 100%; border-collapse: collapse; }
+  .scale-row {
+    display: grid;
+    grid-template-columns: 120px 80px 80px 1fr;
+    gap: 1rem;
+    align-items: center;
+    padding: 1.25rem 1.5rem;
+    background: var(--white);
+    border-bottom: 1px solid var(--cream-mid);
+  }
+  .scale-row:last-child { border-bottom: none; }
+  .scale-tag {
+    font-family: var(--sans);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: var(--green-light);
+    background: var(--cream);
+    padding: 0.2rem 0.5rem;
+    border: 1px solid var(--border);
+    width: fit-content;
+  }
+  .scale-size {
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    color: var(--green-light);
+  }
+  .scale-weight {
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    color: var(--green-light);
+  }
+
+  /* Styles pour chaque niveau */
+  .s-h1 { font-family: var(--display); font-size: 2.5rem; font-weight: 600; letter-spacing: -0.04em; line-height: 1.04; color: var(--green-dark); }
+  .s-h2 { font-family: var(--display); font-size: 1.875rem; font-weight: 600; letter-spacing: -0.035em; line-height: 1.08; color: var(--green-dark); }
+  .s-h3 { font-family: var(--display); font-size: 1.375rem; font-weight: 600; letter-spacing: -0.025em; line-height: 1.15; color: var(--green-dark); }
+  .s-h4 { font-family: var(--sans); font-size: 1rem; font-weight: 600; letter-spacing: -0.01em; color: var(--green-dark); }
+  .s-lead { font-family: var(--sans); font-size: 1.125rem; font-weight: 300; line-height: 1.7; color: var(--green-muted); }
+  .s-body { font-family: var(--sans); font-size: 1rem; font-weight: 400; line-height: 1.6; color: var(--green-muted); }
+  .s-body-sm { font-family: var(--sans); font-size: 0.875rem; font-weight: 400; line-height: 1.65; color: #566159; }
+  .s-eyebrow { font-family: var(--sans); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--terra); }
+  .s-stat { font-family: var(--display); font-size: 2.75rem; font-weight: 600; letter-spacing: -0.03em; line-height: 1; color: var(--green-dark); }
+  .s-caption { font-family: var(--sans); font-size: 0.6875rem; color: var(--green-light); line-height: 1.55; }
+  .s-btn { font-family: var(--sans); font-size: 0.875rem; font-weight: 600; letter-spacing: 0.01em; }
+
+  /* ─── Règles d'usage ─── */
+  .rules-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); }
+  .rule-card { background: var(--white); padding: 1.75rem; }
+  .rule-icon { font-size: 1.25rem; margin-bottom: 0.75rem; }
+  .rule-title { font-family: var(--sans); font-size: 0.75rem; font-weight: 700; color: var(--green-dark); margin-bottom: 0.6rem; }
+  .rule-body { font-family: var(--sans); font-size: 0.8rem; line-height: 1.6; color: var(--green-muted); }
+  .rule-do .rule-title { color: var(--green-mid); }
+  .rule-dont .rule-title { color: #a33f32; }
+
+  /* ─── Palette couleurs avec texte ─── */
+  .color-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: var(--border); }
+  .color-card { background: var(--white); overflow: hidden; }
+  .color-swatch { height: 80px; }
+  .color-info { padding: 0.75rem 1rem; }
+  .color-name { font-family: var(--sans); font-size: 0.7rem; font-weight: 600; color: var(--green-dark); margin-bottom: 0.2rem; }
+  .color-hex { font-family: var(--sans); font-size: 0.65rem; color: var(--green-light); margin-bottom: 0.2rem; }
+  .color-role { font-family: var(--sans); font-size: 0.6rem; color: var(--green-light); }
+
+  /* ─── Exemple en contexte ─── */
+  .context-card {
+    background: var(--green-dark);
+    padding: 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .context-card::before {
+    content: '';
+    position: absolute;
+    right: -2rem;
+    top: -2rem;
+    width: 280px;
+    height: 280px;
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 50%;
+  }
+  .context-card::after {
+    content: '';
+    position: absolute;
+    right: 2rem;
+    top: 2rem;
+    width: 180px;
+    height: 180px;
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 50%;
+  }
+  .ctx-eyebrow { font-family: var(--sans); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--terra); margin-bottom: 1rem; }
+  .ctx-h1 { font-family: var(--display); font-size: 2.75rem; font-weight: 600; letter-spacing: -0.04em; line-height: 1.05; color: white; max-width: 600px; margin-bottom: 1.25rem; }
+  .ctx-lead { font-family: var(--sans); font-size: 1rem; font-weight: 300; line-height: 1.7; color: rgba(255,255,255,0.65); max-width: 480px; margin-bottom: 2rem; }
+  .ctx-btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--terra); color: white;
+    font-family: var(--sans); font-size: 0.875rem; font-weight: 600;
+    padding: 0.875rem 1.75rem; border: none; cursor: pointer;
+  }
+  .ctx-card-row { display: flex; gap: 1rem; margin-top: 2rem; flex-wrap: wrap; }
+  .ctx-mini-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); padding: 1.25rem 1.5rem; flex: 1; min-width: 160px; }
+  .ctx-mini-stat { font-family: var(--display); font-size: 2rem; font-weight: 600; letter-spacing: -0.03em; color: white; }
+  .ctx-mini-label { font-family: var(--sans); font-size: 0.65rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-top: 0.3rem; }
+
+  .context-card-light { background: var(--white); padding: 2.5rem 3rem; border: 1px solid var(--border); }
+  .ctx-section-eyebrow { font-family: var(--sans); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--terra-dark); margin-bottom: 0.75rem; }
+  .ctx-h2 { font-family: var(--display); font-size: 2rem; font-weight: 600; letter-spacing: -0.035em; line-height: 1.08; color: var(--green-dark); margin-bottom: 0.75rem; }
+  .ctx-body { font-family: var(--sans); font-size: 0.9375rem; font-weight: 400; line-height: 1.65; color: var(--green-muted); max-width: 520px; margin-bottom: 1.5rem; }
+  .ctx-caption { font-family: var(--sans); font-size: 0.6875rem; color: var(--green-light); }
+
+  /* ─── Règle interdite ─── */
+  .do-dont { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); }
+  .do-card, .dont-card { background: var(--white); padding: 1.5rem; }
+  .do-label { font-family: var(--sans); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--green-mid); margin-bottom: 1rem; }
+  .dont-label { font-family: var(--sans); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: #a33f32; margin-bottom: 1rem; }
+  .do-example, .dont-example { font-size: 0.85rem; line-height: 1.6; color: var(--green-muted); }
+  .cross-line { position: relative; }
+  .cross-line::after { content: ''; position: absolute; inset: 0; border: 2px solid rgba(163,63,50,0.25); pointer-events: none; }
+
+  @media (max-width: 700px) {
+    .font-duo, .rules-grid, .do-dont, .color-grid { grid-template-columns: 1fr; }
+    .scale-row { grid-template-columns: 1fr; }
+    .header { grid-template-columns: 1fr; }
+    .color-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- EN-TÊTE -->
+  <div class="header">
+    <div>
+      <p class="header-eyebrow">Document de référence</p>
+      <h1 class="header-title">Charte typographique<br>ENERVIA RENOV</h1>
+    </div>
+    <div class="header-badge">v1.0 — Août 2026</div>
+  </div>
+
+  <!-- 1. DUO DE POLICES -->
+  <div class="section">
+    <p class="section-label">01 — Les deux polices du système</p>
+    <div class="font-duo">
+
+      <!-- Display -->
+      <div class="font-card">
+        <p class="font-card-role">Police d'affichage (Titres)</p>
+        <p class="font-card-name">Cormorant Garamond</p>
+        <p class="font-card-fallback">Fallback : Iowan Old Style → Palatino Linotype → Georgia</p>
+        <div class="font-display-sample">Rénovation<br><em>énergétique</em></div>
+        <p style="font-family: var(--display); font-size:0.95rem; color:#566159; line-height:1.6;">
+          Une police aux empattements classiques, inspirée du graveur Claude Garamond. Ses contrastes fins/épais et son italique gracieux lui confèrent une autorité naturelle, idéale pour les titres premium.
+        </p>
+        <div class="font-weights">
+          <div class="weight-item">
+            <span class="weight-sample-display" style="font-weight:400;">Aa</span>
+            <span class="weight-label">400 Regular</span>
+          </div>
+          <div class="weight-item">
+            <span class="weight-sample-display" style="font-weight:500;">Aa</span>
+            <span class="weight-label">500 Medium</span>
+          </div>
+          <div class="weight-item">
+            <span class="weight-sample-display" style="font-weight:600;">Aa</span>
+            <span class="weight-label">600 Semibold</span>
+          </div>
+          <div class="weight-item">
+            <span class="weight-sample-display" style="font-weight:700;">Aa</span>
+            <span class="weight-label">700 Bold</span>
+          </div>
+          <div class="weight-item">
+            <span class="weight-sample-display" style="font-weight:400; font-style:italic;">Aa</span>
+            <span class="weight-label">400 Italic</span>
+          </div>
+          <div class="weight-item">
+            <span class="weight-sample-display" style="font-weight:600; font-style:italic;">Aa</span>
+            <span class="weight-label">600 Italic</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sans -->
+      <div class="font-card">
+        <p class="font-card-role">Police de corps (Interface & texte)</p>
+        <p class="font-card-name">DM Sans</p>
+        <p class="font-card-fallback">Fallback : Avenir Next → Segoe UI → system-ui</p>
+        <div class="font-sans-sample">Navigation, boutons,<br>paragraphes, labels UI,<br>eyebrows et légendes.</div>
+        <p style="font-family: var(--sans); font-size:0.95rem; color:#566159; line-height:1.6;">
+          Dessinée par Colophon Foundry pour Google, DM Sans est une grotesque géométrique à l'âme chaleureuse. Son <em>optical sizing</em> (9–40pt) améliore automatiquement la lisibilité selon la taille affichée.
+        </p>
+        <div class="font-weights">
+          <div class="weight-item">
+            <span class="weight-sample-sans" style="font-weight:300;">Aa</span>
+            <span class="weight-label">300 Light</span>
+          </div>
+          <div class="weight-item">
+            <span class="weight-sample-sans" style="font-weight:400;">Aa</span>
+            <span class="weight-label">400 Regular</span>
+          </div>
+          <div class="weight-item">
+            <span class="weight-sample-sans" style="font-weight:500;">Aa</span>
+            <span class="weight-label">500 Medium</span>
+          </div>
+          <div class="weight-item">
+            <span class="weight-sample-sans" style="font-weight:600;">Aa</span>
+            <span class="weight-label">600 Semibold</span>
+          </div>
+          <div class="weight-item">
+            <span class="weight-sample-sans" style="font-weight:700;">Aa</span>
+            <span class="weight-label">700 Bold</span>
+          </div>
+          <div class="weight-item">
+            <span class="weight-sample-sans" style="font-weight:400; font-style:italic;">Aa</span>
+            <span class="weight-label">400 Italic</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. ÉCHELLE TYPOGRAPHIQUE -->
+  <div class="section">
+    <p class="section-label">02 — Échelle typographique complète</p>
+    <div style="border:1px solid var(--border); overflow:hidden;">
+
+      <div class="scale-row" style="background:var(--cream-mid);">
+        <span class="scale-tag">Élément</span>
+        <span class="scale-size">Taille</span>
+        <span class="scale-weight">Graisse</span>
+        <span class="scale-size">Exemple en contexte</span>
+      </div>
+
+      <div class="scale-row">
+        <span class="scale-tag">h1</span>
+        <span class="scale-size">36→60px<br>clamp</span>
+        <span class="scale-weight">600<br>Semibold</span>
+        <span class="s-h1">Rénovez votre maison.</span>
+      </div>
+
+      <div class="scale-row">
+        <span class="scale-tag">h2</span>
+        <span class="scale-size">28→44px<br>clamp</span>
+        <span class="scale-weight">600<br>Semibold</span>
+        <span class="s-h2">Pompes à chaleur air/eau</span>
+      </div>
+
+      <div class="scale-row">
+        <span class="scale-tag">h3</span>
+        <span class="scale-size">22→30px<br>clamp</span>
+        <span class="scale-weight">600<br>Semibold</span>
+        <span class="s-h3">Isolation des combles perdus</span>
+      </div>
+
+      <div class="scale-row">
+        <span class="scale-tag">h4</span>
+        <span class="scale-size">16px</span>
+        <span class="scale-weight">600<br>Semibold</span>
+        <span class="s-h4">Certification RGE — ce que ça signifie</span>
+      </div>
+
+      <div class="scale-row">
+        <span class="scale-tag">.eyebrow</span>
+        <span class="scale-size">11px</span>
+        <span class="scale-weight">700 Bold<br>+lettresp.</span>
+        <span class="s-eyebrow">Rénovation énergétique</span>
+      </div>
+
+      <div class="scale-row">
+        <span class="scale-tag">.stat</span>
+        <span class="scale-size">40→56px<br>clamp</span>
+        <span class="scale-weight">600<br>Semibold</span>
+        <span class="s-stat">25 à 45 %</span>
+      </div>
+
+      <div class="scale-row">
+        <span class="scale-tag">.lead</span>
+        <span class="scale-size">16→20px<br>clamp</span>
+        <span class="scale-weight">300 Light</span>
+        <span class="s-lead">Évaluez votre projet de rénovation énergétique et obtenez une première estimation des aides disponibles en 2026.</span>
+      </div>
+
+      <div class="scale-row">
+        <span class="scale-tag">p (body)</span>
+        <span class="scale-size">16px</span>
+        <span class="scale-weight">400<br>Regular</span>
+        <span class="s-body">Les pompes à chaleur air/eau utilisent les calories présentes dans l'air extérieur pour chauffer l'eau du circuit de chauffage central, avec un SCOP moyen de 3,5 à 4,5.</span>
+      </div>
+
+      <div class="scale-row">
+        <span class="scale-tag">.body-sm</span>
+        <span class="scale-size">14px</span>
+        <span class="scale-weight">400<br>Regular</span>
+        <span class="s-body-sm">Performances mesurées selon la norme EN 14825 dans les conditions climatiques de la zone H2.</span>
+      </div>
+
+      <div class="scale-row">
+        <span class="scale-tag">button</span>
+        <span class="scale-size">14px</span>
+        <span class="scale-weight">600<br>Semibold</span>
+        <span>
+          <span class="s-btn" style="background:#b9783e; color:white; padding:0.625rem 1.25rem; display:inline-block;">Obtenir mon estimation</span>&nbsp;&nbsp;
+          <span class="s-btn" style="background:#17221c; color:white; padding:0.625rem 1.25rem; display:inline-block;">En savoir plus</span>
+        </span>
+      </div>
+
+      <div class="scale-row">
+        <span class="scale-tag">.caption</span>
+        <span class="scale-size">11px</span>
+        <span class="scale-weight">400<br>Regular</span>
+        <span class="s-caption">Estimation indicative, non contractuelle. Les montants d'aides sont susceptibles d'évoluer selon la réglementation en vigueur.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. PALETTE COULEUR + TYPO -->
+  <div class="section">
+    <p class="section-label">03 — Palette couleurs × typographie</p>
+    <div class="color-grid">
+      <div class="color-card">
+        <div class="color-swatch" style="background:#17221c;"></div>
+        <div class="color-info">
+          <p class="color-name">Vert nuit</p>
+          <p class="color-hex">#17221c</p>
+          <p class="color-role">Titres, fonds hero, nav</p>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background:#3f6147;"></div>
+        <div class="color-info">
+          <p class="color-name">Vert forêt</p>
+          <p class="color-hex">#3f6147</p>
+          <p class="color-role">Accents positifs, icônes</p>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background:#566159;"></div>
+        <div class="color-info">
+          <p class="color-name">Vert ardoise</p>
+          <p class="color-hex">#566159</p>
+          <p class="color-role">Corps de texte, body</p>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background:#b9783e;"></div>
+        <div class="color-info">
+          <p class="color-name">Terracotta</p>
+          <p class="color-hex">#b9783e</p>
+          <p class="color-role">CTA, eyebrows, accents</p>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background:#f5f1e8; border-bottom:1px solid #d7cfc3;"></div>
+        <div class="color-info">
+          <p class="color-name">Crème</p>
+          <p class="color-hex">#f5f1e8</p>
+          <p class="color-role">Fond général, sections</p>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:1px; background:var(--white); border:1px solid var(--border); border-top:none; padding:1.25rem 1.5rem;">
+      <p style="font-family:var(--sans); font-size:0.75rem; color:var(--green-light); line-height:1.7;">
+        <strong style="color:var(--green-dark);">Règle couleur × police :</strong> Les textes <strong style="font-family:var(--display);">Cormorant Garamond</strong> (titres) sont toujours sur fond clair (#f5f1e8 ou blanc) ou sur fond très sombre (#17221c) — jamais sur fond terracotta. Les labels et boutons en <strong>DM Sans</strong> peuvent utiliser toute la palette. Le terracotta (#b9783e) est réservé aux éléments d'action (boutons CTA, eyebrows, accents interactifs) — jamais pour des blocs de texte long.
+      </p>
+    </div>
+  </div>
+
+  <!-- 4. EN CONTEXTE -->
+  <div class="section">
+    <p class="section-label">04 — Application en contexte</p>
+
+    <!-- Hero sombre -->
+    <div class="context-card" style="margin-bottom:1px;">
+      <p class="ctx-eyebrow">Rénovation énergétique globale</p>
+      <h1 class="ctx-h1">Rénovez votre maison.<br>Améliorez durablement<br>votre confort.</h1>
+      <p class="ctx-lead">Chauffage, isolation et premières estimations des aides disponibles en 2026. Simulateur interactif sans engagement.</p>
+      <button class="ctx-btn">Commencer l'estimation →</button>
+      <div class="ctx-card-row">
+        <div class="ctx-mini-card">
+          <div class="ctx-mini-stat">25–45 %</div>
+          <div class="ctx-mini-label">Réduction facture indicative</div>
+        </div>
+        <div class="ctx-mini-card">
+          <div class="ctx-mini-stat">MaPrimeRénov'</div>
+          <div class="ctx-mini-label">Aides mobilisables 2026</div>
+        </div>
+        <div class="ctx-mini-card">
+          <div class="ctx-mini-stat">RGE</div>
+          <div class="ctx-mini-label">Artisans certifiés</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section claire -->
+    <div class="context-card-light">
+      <p class="ctx-section-eyebrow">Performance thermique</p>
+      <h2 class="ctx-h2">Pompe à chaleur air/eau — le choix le plus polyvalent.</h2>
+      <p class="ctx-body">La PAC air/eau puise les calories présentes dans l'air extérieur pour alimenter le circuit de chauffage central et produire l'eau chaude sanitaire. Avec un SCOP moyen compris entre 3,5 et 4,5, elle consomme 3 à 4 fois moins d'énergie qu'une chaudière électrique à effet Joule.</p>
+      <p class="ctx-caption">Performances mesurées selon EN 14825 — zone climatique H2. Non contractuel.</p>
+    </div>
+  </div>
+
+  <!-- 5. RÈGLES D'USAGE -->
+  <div class="section">
+    <p class="section-label">05 — Règles d'usage à respecter</p>
+    <div class="do-dont">
+      <div class="do-card">
+        <p class="do-label">✓ À faire</p>
+        <ul class="do-example" style="padding-left:1rem; list-style-type:disc; display:flex; flex-direction:column; gap:0.6rem;">
+          <li>Tous les H1, H2, H3 → <strong style="font-family:var(--display);">Cormorant Garamond</strong></li>
+          <li>Corps de texte, labels, boutons → <strong>DM Sans</strong></li>
+          <li>Letter-spacing négatif sur tous les titres display (-0.025em minimum)</li>
+          <li>Eyebrow toujours en DM Sans 700, uppercase, avec letter-spacing 0.2em+</li>
+          <li>Grands chiffres (stats, %) → Cormorant Garamond 600 pour l'impact visuel</li>
+          <li>Italique Cormorant autorisé pour les citations et termes techniques</li>
+          <li>Fond sombre (#17221c) → texte corps en rgba(255,255,255,0.65)</li>
+        </ul>
+      </div>
+      <div class="dont-card">
+        <p class="dont-label">✗ À ne jamais faire</p>
+        <ul class="do-example" style="padding-left:1rem; list-style-type:disc; display:flex; flex-direction:column; gap:0.6rem;">
+          <li>Mélanger Cormorant et une autre police serif (Playfair, Times…)</li>
+          <li>Utiliser Cormorant pour les boutons, labels ou navigation</li>
+          <li>Letter-spacing positif sur un titre display (donne un aspect amateur)</li>
+          <li>DM Sans en taille inférieure à 11px (illisible à l'écran)</li>
+          <li>Cormorant 400 pour un titre long — toujours 600 ou 700 pour la lisibilité</li>
+          <li>Eyebrow en police display — elle perd tout son contrôle de rythme</li>
+          <li>Fond terracotta avec du texte display — contraste insuffisant</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div style="border-top:1px solid var(--border); padding-top:1.5rem; display:flex; justify-content:space-between; align-items:center;">
+    <p style="font-family:var(--sans); font-size:0.65rem; color:var(--green-light);">
+      ENERVIA RENOV — Charte typographique v1.0 — 13 août 2026
+    </p>
+    <p style="font-family:var(--sans); font-size:0.65rem; color:var(--green-light);">
+      Cormorant Garamond + DM Sans — Google Fonts — Licence OFL
+    </p>
+  </div>
+
+</div>
+</body>
+</html>

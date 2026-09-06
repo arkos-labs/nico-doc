@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 80" fill="none">
+  <rect width="280" height="80" rx="6" fill="#fff"/>
+  <rect width="8" height="80" fill="#1c4f8c"/>
+  <!-- Bank/coin icon -->
+  <g transform="translate(22, 12)">
+    <rect x="2" y="24" width="30" height="18" rx="2" fill="#1c4f8c" opacity="0.12"/>
+    <rect x="2" y="24" width="30" height="18" rx="2" stroke="#1c4f8c" stroke-width="2" fill="none"/>
+    <!-- Columns -->
+    <rect x="6" y="18" width="3" height="8" fill="#1c4f8c"/>
+    <rect x="13" y="14" width="3" height="12" fill="#1c4f8c"/>
+    <rect x="20" y="18" width="3" height="8" fill="#1c4f8c"/>
+    <rect x="27" y="16" width="3" height="10" fill="#1c4f8c"/>
+    <!-- Roof -->
+    <path d="M0 18 L17 6 L34 18" stroke="#1c4f8c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <!-- 0% -->
+    <text x="9" y="37" font-family="system-ui, sans-serif" font-size="11" font-weight="800" fill="#1c4f8c">0 %</text>
+  </g>
+  <!-- Text -->
+  <text x="74" y="32" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="800" fill="#1a1a1a" letter-spacing="-0.3">Éco-PTZ</text>
+  <text x="74" y="50" font-family="system-ui, -apple-system, sans-serif" font-size="10.5" font-weight="500" fill="#666">Éco-prêt à taux zéro</text>
+  <text x="74" y="66" font-family="system-ui, -apple-system, sans-serif" font-size="9.5" font-weight="600" fill="#1c4f8c" letter-spacing="0.3">Ministère de l'Économie · jusqu'à 50 000 €</text>
+</svg>

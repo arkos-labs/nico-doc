@@ -1,0 +1,48 @@
+# ENERVIA RENOV
+
+> ENERVIA RENOV est un spécialiste de la rénovation énergétique globale basé à Paris (75008), immatriculé au R.C.S. Paris sous le numéro 108 274 549. La plateforme accompagne les particuliers et les copropriétés dans leurs projets de rénovation thermique : pompes à chaleur (aérothermie, géothermie), isolation (ITE, combles, planchers), menuiseries, VMC double flux et audit énergétique réglementaire. Le service intègre l'optimisation des aides d'État disponibles en 2026 : MaPrimeRénov', Certificats d'Économies d'Énergie (CEE) et éco-prêt à taux zéro (éco-PTZ).
+
+## Informations sur la plateforme
+
+- [Accueil — Présentation et simulateur d'estimation](/): Simulateur interactif en 6 étapes permettant d'obtenir une première estimation des économies d'énergie envisageables selon le type de logement, la surface, le chauffage actuel et les travaux souhaités.
+- [Aides financières 2026](/aides-financieres-2026): Présentation exhaustive des dispositifs d'aide en vigueur : MaPrimeRénov' Parcours accompagné et Parcours par gestes, CEE, éco-PTZ, exonérations fiscales locales.
+- [Mentions légales](/mentions-legales): Identité de l'éditeur, immatriculation R.C.S. Paris 108 274 549, adresse : 58 rue de Monceau, 75008 Paris, hébergeur Vercel Inc.
+- [Politique de confidentialité](/politique-de-confidentialite): Traitement des données personnelles, droits RGPD, durée de conservation.
+
+## Solutions de chauffage
+
+- [Pompe à chaleur — Vue d'ensemble](/pompe-a-chaleur): Comparatif des technologies PAC (air/air, air/eau, géothermie), performances SCOP/SEER, fluides frigorigènes R290 et R32, normes NF EN 12831.
+- [PAC air/eau](/pac-air-eau): Technologie dominante pour le chauffage central et l'eau chaude sanitaire. Rendement SCOP > 3,5. Eligible MaPrimeRénov' et CEE.
+- [PAC air/air](/pac-air-air): Climatisation réversible, ideal pour appartements et logements sans plancher chauffant.
+- [PAC géothermie](/pac-geothermie): Performances optimales (SCOP > 4), installation par forage ou capteurs horizontaux, eligible aux plus hauts niveaux de subvention.
+
+## Isolation thermique
+
+- [Isolation thermique — Vue d'ensemble](/isolation-thermique): Panorama des techniques d'isolation, résistances thermiques réglementaires (R ≥ 7 m².K/W pour les combles), impact sur le DPE.
+- [Isolation des combles](/isolation-combles): Combles perdus et combles aménageables. Normes NF DTU 45.10 et 45.11. Perméabilité à l'air Q4Pa-surf. Eligible CEE et MaPrimeRénov'.
+- [Isolation des murs par l'extérieur (ITE)](/isolation-murs): Suppression des ponts thermiques, finitions enduit ou bardage. Norme NF DTU 55.2.
+- [Isolation des planchers bas](/isolation-planchers): Planchers sur vide sanitaire ou sur terre-plein. Résistance thermique minimale R ≥ 3 m².K/W.
+- [Menuiseries et fenêtres](/menuiseries-fenetres): Double et triple vitrage, Uw ≤ 1,3 W/(m².K), certifications Acotherm et NF Fenêtre.
+
+## Ventilation
+
+- [VMC — Ventilation mécanique contrôlée](/vmc-ventilation): VMC simple flux autoréglable, hygro B et double flux. Débit réglementaire, consommations électriques spécifiques (SFP).
+
+## Types de projets
+
+- [Rénovation de maison individuelle](/renovation-maison-individuelle): Stratégies adaptées aux maisons de plain-pied ou à étages, chauffage, isolation globale, DPE cible.
+- [Rénovation d'appartement](/renovation-appartement): Travaux en parties privatives (PAC air/air, VMC, fenêtres, isolation ITI) et en parties communes (ITE via copropriété), MaPrimeRénov' individuelle et Copropriété.
+- [Rénovation d'immeuble et copropriété](/renovation-immeuble): Travaux en parties communes, syndic, vote en assemblée générale, fonds MaPrimeRénov' Copropriété.
+
+## Outils de comparaison et guides d'achat
+
+- [PAC vs chaudière gaz : comparatif](/pompe-a-chaleur-vs-chaudiere-gaz): Rendement (COP/SCOP vs 90 %), coût d'installation, aides disponibles, bilan carbone, compatibilité avec les émetteurs existants.
+- [Audit énergétique réglementaire](/audit-energetique): Obligation légale (loi Climat 2023, vente DPE F/G), contenu de l'audit, différence avec le DPE, lien avec MaPrimeRénov' parcours accompagné.
+
+## Réglementation clé
+
+- Fin de l'isolation à 1 € depuis 2021 (fraudes CEE)
+- Loi Climat et Résilience : obligation d'audit énergétique lors de la vente de logements DPE F et G depuis 2023 (monopropriétés)
+- À partir du 1er janvier 2027 : interdiction du parcours par gestes simples pour les logements classés F et G — rénovation d'ampleur obligatoire
+- Certification RGE obligatoire pour mobiliser MaPrimeRénov', CEE et éco-PTZ
+- Loi n° 2025-594 du 30 juin 2025 (art. 13, en vigueur depuis le 11 août 2026) : opt-in obligatoire pour la prospection téléphonique dans le secteur de la rénovation énergétique

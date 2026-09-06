@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 80" fill="none">
+  <!-- Background -->
+  <rect width="280" height="80" rx="6" fill="#fff"/>
+  <!-- Left color bar -->
+  <rect width="8" height="80" rx="0" fill="#e8501a"/>
+  <!-- House icon -->
+  <g transform="translate(24, 14)">
+    <path d="M18 6 L32 18 L32 36 L4 36 L4 18 Z" fill="#e8501a" opacity="0.15"/>
+    <path d="M18 4 L34 18" stroke="#e8501a" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M2 18 L18 4" stroke="#e8501a" stroke-width="2.5" stroke-linecap="round"/>
+    <rect x="5" y="18" width="26" height="18" rx="1" stroke="#e8501a" stroke-width="2" fill="none"/>
+    <rect x="13" y="25" width="10" height="11" rx="1" fill="#e8501a" opacity="0.4"/>
+    <!-- Flame -->
+    <path d="M23 10 Q25 7 23 4 Q26 6 27 10 Q28 14 24 15 Q26 12 23 10Z" fill="#e8501a"/>
+  </g>
+  <!-- Text -->
+  <text x="74" y="34" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="800" fill="#1a1a1a" letter-spacing="-0.3">MaPrimeRénov'</text>
+  <text x="74" y="52" font-family="system-ui, -apple-system, sans-serif" font-size="10.5" font-weight="500" fill="#666" letter-spacing="0">Agence nationale de l'habitat</text>
+  <text x="74" y="67" font-family="system-ui, -apple-system, sans-serif" font-size="9.5" font-weight="600" fill="#e8501a" letter-spacing="0.3">ANAH · Service public</text>
+</svg>

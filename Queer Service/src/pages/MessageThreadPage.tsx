@@ -1,0 +1,576 @@
+import { useEffect, useLayoutEffect, useRef, useState, type FormEvent } from 'react';
+import { supabase, edgeFunctionErrorMessage, invokeEdgeFunction, PUBLIC_PROFILE_COLUMNS } from '@/lib/supabase';
+import { useRouter } from '@/lib/router';
+import { useAuth } from '@/lib/auth';
+import type { Connection, Message, Profile, Payment } from '@/lib/types';
+import { Avatar } from '@/components/Avatar';
+import { PayNowModal } from '@/components/PayNowModal';
+import { PaymentOfferCard } from '@/components/PaymentOfferCard';
+import { ReviewOfferCard } from '@/components/ReviewOfferCard';
+import { ReviewModal } from '@/components/ReviewModal';
+import { formatDate, timeAgo } from '@/lib/utils';
+import { ArrowLeft, Send, CheckCircle2, XCircle, Clock, Flag, CreditCard, AlertTriangle } from 'lucide-react';
+
+const STATUS_META: Record<Connection['status'], { label: string; cls: string; icon: typeof Clock }> = {
+  pending: { label: 'En attente', cls: 'bg-warning-100 text-warning-700', icon: Clock },
+  accepted: { label: 'Acceptée', cls: 'bg-primary-100 text-primary-600', icon: CheckCircle2 },
+  completed: { label: 'Terminée', cls: 'bg-success-100 text-success-700', icon: CheckCircle2 },
+  cancelled: { label: 'Annulée', cls: 'bg-neutral-100 text-neutral-500', icon: XCircle },
+};
+
+const PAYMENT_STATUS_META: Record<Payment['status'], { label: string; cls: string }> = {
+  pending: { label: 'En attente de paiement', cls: 'bg-warning-100 text-warning-700' },
+  authorized: { label: 'Carte autorisée', cls: 'bg-primary-100 text-primary-600' },
+  captured: { label: 'Payé', cls: 'bg-success-100 text-success-700' },
+  canceled: { label: 'Paiement annulé', cls: 'bg-neutral-100 text-neutral-500' },
+  failed: { label: 'Paiement échoué', cls: 'bg-error-100 text-error-700' },
+  refunded: { label: 'Remboursé', cls: 'bg-neutral-100 text-neutral-500' },
+};
+
+const formatEuros = (cents: number) => (cents / 100).toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' });
+
+export function MessageThreadPage({ id }: { id: string }) {
+  const { user, profile } = useAuth();
+  const { navigate } = useRouter();
+  const [connection, setConnection] = useState<Connection | null>(null);
+  const [other, setOther] = useState<Profile | null>(null);
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [payment, setPayment] = useState<Payment | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [notFound, setNotFound] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [statusLoading, setStatusLoading] = useState(false);
+  const [body, setBody] = useState('');
+  const [sending, setSending] = useState(false);
+  const [payNowLoading, setPayNowLoading] = useState(false);
+  const [payNowSecret, setPayNowSecret] = useState<string | null>(null);
+  const [cancelPaymentLoading, setCancelPaymentLoading] = useState(false);
+  const [reviewOpen, setReviewOpen] = useState(false);
+  const [alreadyReviewed, setAlreadyReviewed] = useState(false);
+  const [paymentJustAuthorized, setPaymentJustAuthorized] = useState(false);
+  const bottomRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const footerRef = useRef<HTMLDivElement>(null);
+  const [headerHeight, setHeaderHeight] = useState(0);
+  const [footerHeight, setFooterHeight] = useState(0);
+
+  useEffect(() => {
+    if (!user) {
+      navigate('/connexion');
+      return;
+    }
+    let cancelled = false;
+    const load = async () => {
+      setLoading(true);
+      setNotFound(false);
+      setError(null);
+      try {
+        const connRes = await supabase.from('connections').select('*').eq('id', id).maybeSingle();
+        if (cancelled) return;
+        const conn = connRes.data as Connection | null;
+        if (connRes.error || !conn || (conn.user_a !== user.id && conn.user_b !== user.id)) {
+          setNotFound(true);
+          setLoading(false);
+          return;
+        }
+        setConnection(conn);
+
+        const otherId = conn.user_a === user.id ? conn.user_b : conn.user_a;
+        const [otherRes, msgsRes, payRes, reviewRes] = await Promise.all([
+          supabase.from('profiles').select(PUBLIC_PROFILE_COLUMNS).eq('id', otherId).maybeSingle(),
+          supabase.from('messages').select('*').eq('connection_id', id).order('created_at', { ascending: true }),
+          supabase
+            .from('payments')
+            .select('*')
+            .eq('connection_id', id)
+            .order('created_at', { ascending: false })
+            .limit(1)
+            .maybeSingle(),
+          supabase
+            .from('reviews')
+            .select('id')
+            .eq('connection_id', id)
+            .eq('author_id', user.id)
+            .maybeSingle(),
+        ]);
+        if (cancelled) return;
+        setOther((otherRes.data ?? null) as Profile | null);
+        const msgs = (msgsRes.data ?? []) as Message[];
+        setMessages(msgs);
+        setPayment((payRes.data ?? null) as Payment | null);
+        setAlreadyReviewed(!!reviewRes.data);
+        setLoading(false);
+
+        const unreadIds = msgs.filter((m) => m.sender_id !== user.id && !m.read_at).map((m) => m.id);
+        if (unreadIds.length) {
+          await supabase.from('messages').update({ read_at: new Date().toISOString() }).in('id', unreadIds);
+        }
+      } catch (e) {
+        if (cancelled) return;
+        setError(e instanceof Error ? e.message : 'Impossible de charger la conversation.');
+        setLoading(false);
+      }
+    };
+    load();
+
+    const channel = supabase
+      .channel(`connection-${id}`)
+      .on(
+        'postgres_changes',
+        {
+          event: 'INSERT',
+          schema: 'public',
+          table: 'messages',
+          filter: `connection_id=eq.${id}`,
+        },
+        (payload) => {
+          const newMessage = payload.new as Message;
+          setMessages((prev) => {
+            if (prev.some((m) => m.id === newMessage.id)) return prev;
+            return [...prev, newMessage];
+          });
+          if (newMessage.sender_id !== user.id) {
+            supabase.from('messages').update({ read_at: new Date().toISOString() }).eq('id', newMessage.id).then();
+          }
+        }
+      )
+      .subscribe();
+
+    return () => {
+      cancelled = true;
+      supabase.removeChannel(channel);
+    };
+  }, [id, user, navigate]);
+
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages.length, payment?.status]);
+
+  // The card form closes as soon as Stripe confirms the authorization, but
+  // nothing else on screen changed yet at that exact instant (the sticky
+  // banner update and this effect fire in the same tick) — without an
+  // explicit acknowledgement it looked like the payment vanished. Show it
+  // briefly, then let the permanent "Carte autorisée" banner speak for itself.
+  useEffect(() => {
+    if (!paymentJustAuthorized) return;
+    const t = setTimeout(() => setPaymentJustAuthorized(false), 5000);
+    return () => clearTimeout(t);
+  }, [paymentJustAuthorized]);
+
+  // The header (name row + optional payment banner + optional action row)
+  // and footer (composer) are fixed-position, so the scrollable message list
+  // needs matching padding — but their heights change depending on
+  // connection/payment state. A hardcoded pixel padding drifts out of sync
+  // and clips the first/last messages behind the fixed bars, so measure the
+  // real rendered heights instead.
+  useLayoutEffect(() => {
+    const header = headerRef.current;
+    const footer = footerRef.current;
+    if (!header || !footer) return;
+    const update = () => {
+      setHeaderHeight(header.offsetHeight);
+      setFooterHeight(footer.offsetHeight);
+    };
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(header);
+    ro.observe(footer);
+    return () => ro.disconnect();
+  }, [connection?.status, payment, profile?.charte_accepted, alreadyReviewed]);
+
+  const sendMessage = async (e: FormEvent) => {
+    e.preventDefault();
+    if (!user || !connection || !body.trim() || sending) return;
+    setSending(true);
+    setError(null);
+    const text = body.trim();
+    const { data, error: sendErr } = await supabase
+      .from('messages')
+      .insert({ connection_id: connection.id, sender_id: user.id, body: text })
+      .select()
+      .single();
+    setSending(false);
+    if (sendErr) {
+      setError(
+        sendErr.message.includes('charte')
+          ? "L'envoi de messages nécessite d'avoir accepté la charte de respect."
+          : sendErr.message,
+      );
+      return;
+    }
+    setMessages((prev) => [...prev, data as Message]);
+    setBody('');
+  };
+
+  const payNow = async () => {
+    if (!connection || !user) return;
+    setError(null);
+    setPayNowLoading(true);
+    const { data, error: fnErr } = await invokeEdgeFunction<{ client_secret?: string }>('stripe-create-payment', {
+      connection_id: connection.id,
+    });
+    setPayNowLoading(false);
+    if (fnErr) {
+      setError(await edgeFunctionErrorMessage(fnErr, 'Impossible de préparer le paiement.'));
+      return;
+    }
+    if (!data?.client_secret) {
+      setError('Impossible de préparer le paiement.');
+      return;
+    }
+    setPayNowSecret(data.client_secret);
+  };
+
+  const counterPayment = async (amountCents: number): Promise<string | null> => {
+    if (!connection || !user) return 'Erreur.';
+    const { data, error: fnErr } = await invokeEdgeFunction<{ payment?: Payment }>('stripe-counter-payment', {
+      connection_id: connection.id,
+      amount: amountCents,
+    });
+    if (fnErr) return await edgeFunctionErrorMessage(fnErr, "Impossible d'envoyer la contre-offre.");
+    if (data?.payment) setPayment(data.payment as Payment);
+    return null;
+  };
+
+  const cancelPayment = async () => {
+    if (!connection || !user || !payment) return;
+    setError(null);
+    setCancelPaymentLoading(true);
+    const { error: fnErr } = await invokeEdgeFunction('stripe-manage-payment', {
+      connection_id: connection.id,
+      action: 'cancel',
+    });
+    setCancelPaymentLoading(false);
+    if (fnErr) {
+      setError(await edgeFunctionErrorMessage(fnErr, "Le paiement n'a pas pu être annulé."));
+      return;
+    }
+    setPayment({ ...payment, status: 'canceled' });
+  };
+
+  const updateStatus = async (status: Connection['status']) => {
+    if (!connection || !user) return;
+    setError(null);
+
+    // Money only moves when the client (payer) confirms completion — the
+    // provider can never capture their own payment.
+    if (status === 'completed' && payment && (payment.status === 'pending' || payment.status === 'authorized')) {
+      if (payment.payer_id !== user.id) {
+        setError('Seul·e le·la client·e qui a payé peut confirmer la fin de la prestation.');
+        return;
+      }
+      if (payment.status === 'pending') {
+        setError("Le paiement n'est pas encore confirmé — patientez avant de clôturer.");
+        return;
+      }
+      setStatusLoading(true);
+      const { error: fnErr } = await invokeEdgeFunction('stripe-manage-payment', {
+        connection_id: connection.id,
+        action: 'capture',
+      });
+      setStatusLoading(false);
+      if (fnErr) {
+        setError(await edgeFunctionErrorMessage(fnErr, "Le paiement n'a pas pu être capturé."));
+        return;
+      }
+      setPayment({ ...payment, status: 'captured' });
+      // The provider never sees the payer confirm+pay happen on their own
+      // screen in real time — post it as an actual message so it shows up
+      // as a follow-up notification in their Messages list (bumps
+      // connection.updated_at and counts as unread), not just a silent
+      // status change only visible if they happen to reopen the thread.
+      await supabase.from('messages').insert({
+        connection_id: connection.id,
+        sender_id: user.id,
+        body: `J'ai confirmé que la prestation a bien été réalisée et le paiement de ${formatEuros(payment.amount)} a été effectué. Merci !`,
+      });
+    }
+
+    if (status === 'cancelled' && payment && (payment.status === 'pending' || payment.status === 'authorized')) {
+      setStatusLoading(true);
+      const { error: fnErr } = await invokeEdgeFunction('stripe-manage-payment', {
+        connection_id: connection.id,
+        action: 'cancel',
+      });
+      setStatusLoading(false);
+      if (fnErr) {
+        setError(await edgeFunctionErrorMessage(fnErr, "Le paiement n'a pas pu être annulé."));
+        return;
+      }
+      setPayment({ ...payment, status: 'canceled' });
+    }
+
+    const { error: upErr } = await supabase
+      .from('connections')
+      .update({ status, updated_at: new Date().toISOString() })
+      .eq('id', connection.id);
+    if (!upErr) setConnection({ ...connection, status });
+  };
+
+  if (!user) return null;
+
+  if (notFound) {
+    return (
+      <div className="container-app py-16 text-center">
+        <h2 className="font-display text-2xl font-semibold text-neutral-900">Conversation introuvable</h2>
+        <p className="mt-2 text-neutral-500">Elle n'existe plus ou vous n'y avez pas accès.</p>
+        <button onClick={() => navigate('/messages')} className="btn-primary mt-6">Retour aux messages</button>
+      </div>
+    );
+  }
+
+  if (loading || !connection) {
+    return <div className="container-app py-16"><div className="card h-96 animate-pulse bg-neutral-100" /></div>;
+  }
+
+  const isInitiator = connection.user_a === user.id;
+  const isPayer = payment ? payment.payer_id === user.id : isInitiator;
+  const statusMeta = STATUS_META[connection.status];
+
+  type TimelineItem =
+    | { kind: 'message'; data: Message; created_at: string }
+    | { kind: 'payment'; data: Payment; created_at: string };
+  const timeline: TimelineItem[] = [
+    ...messages.map((m) => ({ kind: 'message' as const, data: m, created_at: m.created_at })),
+    ...(payment ? [{ kind: 'payment' as const, data: payment, created_at: payment.created_at }] : []),
+  ].sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime());
+
+  return (
+    <div className="flex flex-col animate-fade-in min-h-screen bg-paper-base">
+      {payNowSecret && (
+        <PayNowModal
+          clientSecret={payNowSecret}
+          connectionId={connection.id}
+          amount={payment?.amount}
+          feeAmount={payment?.platform_fee_amount}
+          onClose={() => setPayNowSecret(null)}
+          onDone={() => {
+            setPayNowSecret(null);
+            if (payment) setPayment({ ...payment, status: 'authorized' });
+            setError(null);
+            setPaymentJustAuthorized(true);
+          }}
+        />
+      )}
+      {reviewOpen && other && (
+        <ReviewModal
+          targetId={other.id}
+          targetName={other.display_name}
+          connectionId={connection.id}
+          authorId={user.id}
+          authorName={profile?.display_name ?? 'Un membre'}
+          onClose={() => setReviewOpen(false)}
+          onDone={() => {
+            setReviewOpen(false);
+            setAlreadyReviewed(true);
+          }}
+        />
+      )}
+      {/* Thread header */}
+      <div ref={headerRef} className="fixed top-[84px] z-40 mx-auto w-full max-w-6xl border-b border-gold-hairline bg-white/60 backdrop-blur-xl">
+        <div className="mx-auto flex max-w-6xl items-center gap-3 px-4 py-3">
+          <button onClick={() => navigate('/messages')} aria-label="Retour aux messages" className="rounded-full p-1.5 text-ink-muted hover:bg-paper-base">
+            <ArrowLeft size={18} />
+          </button>
+          <button onClick={() => other && navigate(`/profil/${other.id}`)} className="flex min-w-0 flex-1 items-center gap-2.5 text-left">
+            <Avatar name={other?.display_name ?? 'Membre'} src={other?.photo_url} size={36} className="bg-paper-raised text-ink-muted border border-gold-hairline" />
+            <div className="min-w-0">
+              <p className="truncate text-sm font-semibold text-ink-base">{other?.display_name ?? 'Membre'}</p>
+              <span className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-medium ${statusMeta.cls}`}>
+                <statusMeta.icon size={10} /> {statusMeta.label}
+              </span>
+            </div>
+          </button>
+        </div>
+
+        {payment && (
+          <div className="flex items-center gap-2 border-t border-gold-hairline bg-paper-base px-4 py-2 text-xs">
+            <CreditCard size={13} className="shrink-0 text-patina-deep" />
+            <span className="font-semibold text-ink-base">{formatEuros(payment.amount)}</span>
+            <span className={`inline-flex items-center rounded-full px-2 py-0.5 font-medium ${PAYMENT_STATUS_META[payment.status].cls}`}>
+              {PAYMENT_STATUS_META[payment.status].label}
+            </span>
+            {payment.status === 'pending' && !payment.stripe_payment_intent_id && (
+              <span className="text-patina-deep/80">
+                {connection.status === 'accepted'
+                  ? `en attente que ${isPayer ? 'vous payiez' : 'le client paye'}`
+                  : `en attente que ${isPayer ? 'le·la prestataire accepte' : 'vous acceptiez'} la mission`}
+              </span>
+            )}
+            {payment.status === 'pending' && payment.stripe_payment_intent_id && (
+              <span className="text-patina-deep/80">paiement en cours de confirmation…</span>
+            )}
+            {payment.status === 'authorized' && (
+              <span className="text-patina-deep/80">débité quand {isPayer ? 'vous confirmerez' : 'le client confirmera'} la fin de la prestation</span>
+            )}
+          </div>
+        )}
+
+        {connection.status !== 'cancelled' && connection.status !== 'completed' && (
+          <div className="flex flex-wrap items-center gap-2 border-t border-gold-hairline px-4 py-2 bg-white/40">
+            {connection.status === 'pending' && !isInitiator && !payment && (
+              <button
+                onClick={() => updateStatus('accepted')}
+                disabled={statusLoading}
+                className="btn-outline btn-sm"
+              >
+                <CheckCircle2 size={14} /> {statusLoading ? 'Traitement…' : 'Accepter'}
+              </button>
+            )}
+            {connection.status === 'accepted' && payment && payment.status === 'pending' && !payment.stripe_payment_intent_id && (
+              isPayer ? (
+                <button onClick={payNow} disabled={payNowLoading} className="flex items-center gap-1.5 rounded-lg bg-ink-base px-3 py-1.5 text-xs font-semibold text-white shadow-sm hover:brightness-110">
+                  <CreditCard size={14} /> {payNowLoading ? 'Préparation…' : 'Payer maintenant'}
+                </button>
+              ) : (
+                <span className="inline-flex items-center gap-1.5 rounded-lg bg-white border border-gold-hairline px-3 py-1.5 text-xs font-medium text-ink-muted">
+                  <Clock size={13} /> En attente que le client règle le paiement
+                </span>
+              )
+            )}
+            {connection.status === 'accepted' && payment && payment.status === 'pending' && payment.stripe_payment_intent_id && (
+              <span className="inline-flex items-center gap-1.5 rounded-lg bg-white border border-gold-hairline px-3 py-1.5 text-xs font-medium text-ink-muted">
+                <Clock size={13} /> Paiement en cours de confirmation…
+              </span>
+            )}
+            {connection.status === 'accepted' && (!payment || payment.status === 'authorized') && (
+              payment && !isPayer ? (
+                <span className="inline-flex items-center gap-1.5 rounded-lg bg-white border border-gold-hairline px-3 py-1.5 text-xs font-medium text-ink-muted">
+                  <Clock size={13} /> En attente que le client confirme la fin de la prestation
+                </span>
+              ) : (
+                <button onClick={() => updateStatus('completed')} disabled={statusLoading} className="btn-outline btn-sm">
+                  <CheckCircle2 size={14} /> {statusLoading ? 'Traitement…' : payment ? 'Confirmer la fin & payer' : 'Marquer terminée'}
+                </button>
+              )
+            )}
+            <button onClick={() => updateStatus('cancelled')} disabled={statusLoading} className="btn-ghost btn-sm text-error-600 hover:bg-error-50">
+              <XCircle size={14} /> Annuler
+            </button>
+          </div>
+        )}
+
+      </div>
+
+      {/* Messages */}
+      <div
+        className="flex-1 space-y-3 px-4"
+        style={{ paddingTop: headerHeight ? headerHeight + 12 : undefined, paddingBottom: footerHeight ? footerHeight + 12 : undefined }}
+      >
+        {timeline.length === 0 ? (
+          <p className="py-10 text-center text-sm text-ink-muted">
+            Aucun message pour l'instant. Dites bonjour à {other?.display_name?.split(' ')[0] ?? 'ce membre'} !
+          </p>
+        ) : (
+          timeline.map((item, i) => {
+            const prev = timeline[i - 1];
+            const showDate = !prev || new Date(prev.created_at).toDateString() !== new Date(item.created_at).toDateString();
+            return (
+              <div key={item.kind === 'message' ? item.data.id : `payment-${item.data.id}`}>
+                {showDate && (
+                  <p className="my-3 text-center text-xs font-medium text-patina-deep">{formatDate(item.created_at)}</p>
+                )}
+                {item.kind === 'payment' ? (
+                  <PaymentOfferCard
+                    payment={item.data}
+                    connectionStatus={connection.status}
+                    currentUserId={user.id}
+                    otherName={other?.display_name?.split(' ')[0] ?? 'l\'autre membre'}
+                    isPayer={isPayer}
+                    statusLoading={statusLoading}
+                    payNowLoading={payNowLoading}
+                    onAccept={() => updateStatus('accepted')}
+                    onRefuse={() => updateStatus('cancelled')}
+                    onPayNow={payNow}
+                    onCompleteAndPay={() => updateStatus('completed')}
+                    onCounter={counterPayment}
+                    onCancelPayment={cancelPayment}
+                    cancelLoading={cancelPaymentLoading}
+                  />
+                ) : (
+                  (() => {
+                    const m = item.data;
+                    const mine = m.sender_id === user.id;
+                    return (
+                      <div className={`flex ${mine ? 'justify-end' : 'justify-start'}`}>
+                        <div
+                          className={`max-w-[75%] rounded-2xl px-4 py-2.5 text-sm shadow-sm border border-gold-hairline ${
+                            mine
+                              ? 'rounded-br-sm bg-patina-deep text-white'
+                              : 'rounded-bl-sm bg-white text-ink-base'
+                          }`}
+                        >
+                          <p className="whitespace-pre-wrap break-words">{m.body}</p>
+                          <p className={`mt-1 text-[10px] ${mine ? 'text-white/80' : 'text-patina-deep'}`}>{timeAgo(m.created_at)}</p>
+                        </div>
+                      </div>
+                    );
+                  })()
+                )}
+              </div>
+            );
+          })
+        )}
+        {connection.status === 'completed' && (
+          <ReviewOfferCard
+            otherName={other?.display_name?.split(' ')[0] ?? 'l\'autre membre'}
+            alreadyReviewed={alreadyReviewed}
+            onReview={() => setReviewOpen(true)}
+          />
+        )}
+        <div className="h-40" />
+        <div ref={bottomRef} />
+      </div>
+
+      {paymentJustAuthorized && payment && (
+        <div className="mx-4 mb-2 flex items-start gap-2 rounded-xl bg-success-50 p-3 text-sm text-success-700">
+          <CheckCircle2 size={16} className="mt-0.5 shrink-0" />
+          <span>
+            Carte autorisée pour {formatEuros(payment.amount + payment.platform_fee_amount)} (dont {formatEuros(payment.platform_fee_amount)} de
+            frais de service). Le débit aura lieu une fois la prestation confirmée terminée.
+          </span>
+        </div>
+      )}
+
+      {error && (
+        <div className="mx-4 mb-2 flex items-start gap-2 rounded-xl bg-error-50 p-3 text-sm text-error-700">
+          <AlertTriangle size={16} className="mt-0.5 shrink-0" /> <span>{error}</span>
+        </div>
+      )}
+
+      {/* Composer */}
+      <div ref={footerRef} className="fixed bottom-[calc(61px+env(safe-area-inset-bottom))] z-30 mx-auto w-full max-w-6xl">
+        {!profile?.charte_accepted ? (
+          <div className="flex items-center gap-2 border-t border-gold-hairline bg-warning-50 px-4 py-3 text-xs text-warning-800">
+            <Flag size={14} /> Acceptez la charte de respect depuis votre profil pour pouvoir écrire.
+          </div>
+        ) : (
+          <form onSubmit={sendMessage} className="mx-auto flex max-w-6xl items-end gap-2 border-t border-gold-hairline bg-white/80 px-4 py-3 backdrop-blur-xl">
+            <label htmlFor="thread-composer" className="sr-only">Votre message</label>
+            <textarea
+              id="thread-composer"
+              value={body}
+              onChange={(e) => setBody(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                  e.preventDefault();
+                  sendMessage(e as unknown as FormEvent);
+                }
+              }}
+              rows={1}
+              placeholder="Écrire un message…"
+              className="flex-1 resize-none rounded-xl border border-gold-hairline bg-white px-4 py-3 text-[15px] shadow-sm outline-none ring-gold-hairline focus:border-patina-deep focus:ring-1 max-h-28"
+              onInput={(e) => {
+                e.currentTarget.style.height = 'auto';
+                e.currentTarget.style.height = `${e.currentTarget.scrollHeight}px`;
+              }}
+            />
+            <button type="submit" disabled={sending || !body.trim()} className="flex items-center justify-center rounded-xl bg-ink-base px-4 py-3 font-semibold text-white shadow-soft transition-transform hover:-translate-y-0.5 shrink-0" aria-label="Envoyer">
+              <Send size={16} />
+            </button>
+          </form>
+        )}
+      </div>
+    </div>
+  );
+}

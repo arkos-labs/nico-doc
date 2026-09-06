@@ -1,0 +1,364 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * ============================================================
+ * DESIGN SYSTEM — ENERVIA RENOV
+ * Typographie : Cormorant Garamond (display) + DM Sans (corps)
+ * Palette : vert profond #17221c + terracotta #b9783e
+ * ============================================================
+ */
+
+@theme inline {
+  /* ── Typographie ─────────────────────────────────────────── */
+  /*
+   * DISPLAY : Cormorant Garamond
+   *   Usage  : H1, H2, H3, grands chiffres, citations
+   *   Âme    : Élégance classique, serif haut de gamme
+   *   Weights: 400 (body copy display), 500 (medium), 600 (semibold), 700 (bold)
+   *   Note   : Toujours avec letter-spacing négatif (-0.025em minimum)
+   */
+  --font-display:
+    "Cormorant Garamond",
+    "Iowan Old Style",
+    "Palatino Linotype",
+    Georgia,
+    serif;
+
+  /*
+   * SANS : DM Sans
+   *   Usage  : Corps de texte, labels, navigation, boutons, UI
+   *   Âme    : Moderne, lisible, neutre et chaleureux
+   *   Weights: 300 (light léger), 400 (regular), 500 (medium), 600 (semibold), 700 (bold)
+   *   Note   : Optical size 9–40 activé → meilleure lisibilité aux petites tailles
+   */
+  --font-sans:
+    "DM Sans",
+    "Avenir Next",
+    Avenir,
+    "Segoe UI",
+    ui-sans-serif,
+    system-ui,
+    sans-serif;
+
+  /* ── Rayon de bordure ────────────────────────────────────── */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 16px);
+  --radius-4xl: calc(var(--radius) + 24px);
+
+  /* ── Couleurs système Tailwind ───────────────────────────── */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-cta: var(--cta);
+  --color-cta-foreground: var(--cta-foreground);
+  --color-brand: var(--brand);
+  --color-brand-soft: var(--brand-soft);
+}
+
+:root,
+.dark {
+  --radius: 0.75rem;
+
+  --background: oklch(0.965 0.012 85);
+  --foreground: oklch(0.2 0.025 150);
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.2 0.02 250);
+
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.2 0.02 250);
+
+  --primary: oklch(0.47 0.075 150);
+  --primary-foreground: oklch(1 0 0);
+
+  --secondary: oklch(0.96 0.005 90);
+  --secondary-foreground: oklch(0.25 0.02 250);
+
+  --brand: oklch(0.47 0.075 150);
+  --brand-soft: oklch(0.93 0.025 145);
+  --cta: oklch(0.58 0.105 58);
+  --cta-foreground: oklch(1 0 0);
+
+  --muted: oklch(0.95 0.005 90);
+  --muted-foreground: oklch(0.5 0.02 250);
+
+  --accent: oklch(0.95 0.02 155);
+  --accent-foreground: oklch(0.4 0.12 155);
+
+  --destructive: oklch(0.55 0.22 25);
+  --destructive-foreground: oklch(1 0 0);
+
+  --border: oklch(0.91 0.005 90);
+  --input: oklch(0.91 0.005 90);
+  --ring: oklch(0.58 0.105 58);
+
+  --chart-1: oklch(0.55 0.14 155);
+  --chart-2: oklch(0.65 0.12 200);
+  --chart-3: oklch(0.72 0.1 80);
+  --chart-4: oklch(0.6 0.14 30);
+  --chart-5: oklch(0.45 0.12 280);
+
+  --sidebar: oklch(0.985 0.005 90);
+  --sidebar-foreground: oklch(0.2 0.02 250);
+  --sidebar-primary: oklch(0.55 0.14 155);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.96 0.005 90);
+  --sidebar-accent-foreground: oklch(0.25 0.02 250);
+  --sidebar-border: oklch(0.91 0.005 90);
+  --sidebar-ring: oklch(0.55 0.14 155);
+}
+
+/* ── Base globale ─────────────────────────────────────────── */
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    font-family: var(--font-sans);
+    font-optical-sizing: auto;          /* Active le optical sizing de DM Sans */
+    font-size: 1rem;                    /* 16px — base immuable */
+    line-height: 1.6;
+    color: var(--color-foreground);
+    background-color: var(--color-background);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  /*
+   * HIÉRARCHIE DES TITRES
+   * Règle : tout titre utilise font-display (Cormorant Garamond)
+   * avec tracking négatif et line-height resserré.
+   */
+  h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.25rem, 5vw, 3.75rem);   /* 36px → 60px responsive */
+    font-weight: 600;
+    line-height: 1.04;
+    letter-spacing: -0.04em;
+    color: #17221c;
+  }
+
+  h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 3.5vw, 2.75rem); /* 28px → 44px responsive */
+    font-weight: 600;
+    line-height: 1.08;
+    letter-spacing: -0.035em;
+    color: #17221c;
+  }
+
+  h3 {
+    font-family: var(--font-display);
+    font-size: clamp(1.375rem, 2.5vw, 1.875rem); /* 22px → 30px responsive */
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+    color: #17221c;
+  }
+
+  h4 {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+    color: #17221c;
+  }
+
+  p {
+    font-family: var(--font-sans);
+    max-width: 72ch;                    /* Largeur de lecture optimale */
+  }
+
+  /* Liens inline */
+  a {
+    color: inherit;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+
+  /* Small / captions */
+  small {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 400;
+  }
+}
+
+/* ── Accessibilité & interactions ─────────────────────────── */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  :focus-visible {
+    outline: 2px solid oklch(0.72 0.12 65);
+    outline-offset: 4px;
+  }
+
+  ::selection {
+    background: oklch(0.58 0.105 58 / 0.25);
+  }
+}
+
+/* ── Ombres ───────────────────────────────────────────────── */
+@theme inline {
+  --shadow-soft: 0 1px 3px rgb(0 0 0 / 0.06), 0 4px 12px rgb(0 0 0 / 0.04);
+  --shadow-lift: 0 4px 6px rgb(0 0 0 / 0.04), 0 20px 40px -8px rgb(0 0 0 / 0.1);
+}
+
+/* ── Utilitaires typographiques ───────────────────────────── */
+
+/*
+ * .premium-eyebrow — Variante enrichie de l'eyebrow (terracotta chaud)
+ * Usage  : sections hero, sections de mise en avant, SiloPage
+ */
+@utility premium-eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #956032;
+}
+
+/*
+ * .eyebrow — Label de section (ex : "NOS SERVICES")
+ * Police : DM Sans — toujours sans-serif, jamais display
+ * Usage  : p ou span au-dessus d'un h2
+ */
+@utility eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
+/*
+ * .eyebrow-cta — Variante terracotta pour sections CTA / devis
+ */
+@utility eyebrow-cta {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #b9783e;
+}
+
+/*
+ * .lead — Paragraphe d'accroche sous un H1
+ * Police : DM Sans 300 (light) — légèreté intentionnelle
+ */
+@utility lead {
+  font-family: var(--font-sans);
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  font-weight: 300;
+  line-height: 1.7;
+  color: #566159;
+  max-width: 60ch;
+}
+
+/*
+ * .body-sm — Corps de texte secondaire (descriptions, footers)
+ */
+@utility body-sm {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.65;
+  color: #566159;
+}
+
+/*
+ * .stat — Grand chiffre indicateur
+ * Police : Cormorant Garamond — les chiffres ont plus d'impact en serif
+ */
+@utility stat {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: #17221c;
+}
+
+/*
+ * .caption — Mention légale, disclaimer, note de bas
+ */
+@utility caption {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 400;
+  line-height: 1.55;
+  color: #8a9490;
+  letter-spacing: 0.01em;
+}
+
+/* ── Animations ───────────────────────────────────────────── */
+@keyframes reveal-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ── Layout helpers ───────────────────────────────────────── */
+@utility section-y {
+  padding-block: 5rem;
+  @media (min-width: 768px) { padding-block: 7rem; }
+}

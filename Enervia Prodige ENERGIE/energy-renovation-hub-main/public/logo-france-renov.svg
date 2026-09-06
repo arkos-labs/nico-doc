@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 80" fill="none">
+  <rect width="280" height="80" rx="6" fill="#fff"/>
+  <rect width="8" height="80" fill="#3d6b52"/>
+  <!-- Leaf/person icon -->
+  <g transform="translate(22, 10)">
+    <!-- Person -->
+    <circle cx="17" cy="13" r="7" fill="#3d6b52" opacity="0.15"/>
+    <circle cx="17" cy="13" r="7" stroke="#3d6b52" stroke-width="2" fill="none"/>
+    <!-- Body -->
+    <path d="M5 42 Q5 28 17 26 Q29 28 29 42" stroke="#3d6b52" stroke-width="2" fill="#3d6b52" opacity="0.15"/>
+    <path d="M5 42 Q5 28 17 26 Q29 28 29 42" stroke="#3d6b52" stroke-width="2" fill="none"/>
+    <!-- Star/badge -->
+    <circle cx="28" cy="10" r="7" fill="#3d6b52"/>
+    <text x="24.5" y="14" font-family="system-ui, sans-serif" font-size="9" font-weight="800" fill="white">i</text>
+  </g>
+  <!-- Text -->
+  <text x="74" y="32" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="800" fill="#1a1a1a" letter-spacing="-0.3">France Rénov'</text>
+  <text x="74" y="50" font-family="system-ui, -apple-system, sans-serif" font-size="10.5" font-weight="500" fill="#666">Mon Accompagnateur Rénov' (MAR)</text>
+  <text x="74" y="66" font-family="system-ui, -apple-system, sans-serif" font-size="9.5" font-weight="600" fill="#3d6b52" letter-spacing="0.3">Service public d'accompagnement · 0808 800 700</text>
+</svg>
